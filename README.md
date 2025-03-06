@@ -1,8 +1,12 @@
-# Islamic Knowledge Base Q&A System
+# Islamic AI Agent System
 
-An AI-powered question answering system focused on Islamic knowledge, leveraging curated content from authentic sources and OpenAI's NLP capabilities. The system provides context-aware answers about Islamic practices, beliefs, and traditions while maintaining source fidelity.
+An AI-powered q & a agent system focused on Islamic knowledge, leveraging scraped content from authentic sources and OpenAI's NLP capabilities. The system provides context-aware answers about Islamic practices, beliefs, and traditions while maintaining source fidelity.
 
-## Key Features ✨
+## Preview
+
+<img src="https://res.cloudinary.com/diekemzs9/image/upload/v1741292644/Screenshot_2025-03-06_191123_m0nrti.png" alt="My Image" width="950"/>
+
+## Key Features 
 
 - **Q&A Interface**: Natural language interface for asking Islamic-related questions
 - **Context-Aware Answers**: AI responses grounded in verified Islamic content
