@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\title{Hudgent: Technical Documentation and System Analysis}
+\author{Ibrahim Rayamah \\ \texttt{@iBz-04}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document provides an academic and technical overview of the Islamic AI Agent, an AI-powered question and answer system aimed at addressing inquiries related to Islamic jurisprudence and practices. The focus is on describing the system architecture, methodologies employed, and the technology stack used, based on the implemented components such as data acquisition, indexing, retrieval, and answer generation. 
+\end{abstract}
+
+\section{Introduction}
+In recent years, the development of natural language processing systems has facilitated the construction of domain-specific Q\&A systems. The Islamic AI Agent is one such system that focuses on delivering responses regarding Islamic knowledge through the integration of curated datasets, web-scraped content from authenticated sources, and advanced language models. This document outlines the project's working principles and core algorithms in an academic manner.
+
+\section{System Overview}
+The Islamic AI Agent comprises three primary components:
+\begin{enumerate}
+    \item \textbf{Data Acquisition}: Gathering content using pre-defined sample datasets and a web crawler that extracts data from trusted websites (e.g., \url{https://www.islamveihsan.com/}).
+    \item \textbf{Indexing and Retrieval}: Employing the Whoosh search engine to index the acquired content. The database is constructed with a domain-specific schema that includes fields such as title, content, and fiqh category to facilitate accurate and context-aware searches.
+    \item \textbf{Answer Generation}: Utilizing OpenAI's GPT-3.5-turbo model to generate responses based on the retrieved context. The system embeds a validation layer that ensures generated answers strictly adhere to theological guidelines and accurately reference their sources.
+\end{enumerate}
+
+\section{Methodology}
+\subsection{Data Acquisition and Preprocessing}
+The system gathers its data in two ways:
+\begin{itemize}
+    \item \textbf{Sample Data Creation}: Curated JSON datasets covering topics such as fasting (Oruç), Ramadan, and prayer (Dua) are maintained. Each entry includes metadata for fiqh categorization and source references.
+    \item \textbf{Web Crawling}: A custom web crawler is implemented to visit authenticated Islamic websites and extract relevant textual content. The crawler filters the content through criteria tailored to ensure only high-quality and doctrinally sound materials are collected.
+\end{itemize}
+After collection, the data undergoes cleaning and annotation before being enriched with metadata and indexed via the Whoosh engine.
+
+\subsection{Indexing and Retrieval}
+The preprocessed data is indexed using Whoosh, a fast and flexible search engine library for Python. A custom schema is defined to include essential fields such as:
+\begin{itemize}
+    \item \textbf{Title}: The title or subject of the content.
+    \item \textbf{Content}: The main text body, processed to support efficient text search and retrieval.
+    \item \textbf{Fiqh Category}: A marker that categorizes each piece of content according to Islamic jurisprudence.
+\end{itemize}
+This structured indexing enables the system to perform rapid retrieval of contextually relevant passages in response to user queries.
+
+\subsection{Answer Generation Pipeline}
+The answer generation process involves three stages:
+\begin{enumerate}
+    \item \textbf{Context Retrieval}: The system queries the indexed database to retrieve the most relevant passages based on the user input.
+    \item \textbf{Prompt Construction}: A detailed prompt is constructed by combining the user query with the retrieved context. This prompt is carefully formulated to instruct the language model to limit its response to the provided context.
+    \item \textbf{Response Generation and Validation}: The prompt is fed to OpenAI's GPT-3.5-turbo model, which generates a response. A subsequent validation step ensures that the response adheres to doctrinal and source citation guidelines. If the answer is unclear in the context, the system is designed to return a standard response (e.g., "Allah knows best").
+\end{enumerate}
+
+An example of the answer generation function implemented in Python is shown below:
+\begin{lstlisting}[language=Python, caption=Example of Answer Generation Function]
+def ask_question(question, context):
+    prompt = f"""
+    You are an Islamic scholarly assistant.
+    Answer the following question using only the context provided.
+    Context: {context}
+    Question: {question}
+    If the answer is unclear from the context, reply with 'Allah knows best'.
+    """
+    return gpt_model.generate(prompt)
+\end{lstlisting}
+
+\section{Technology Stack}
+The Islamic AI Agent is built with the following technologies:
+\begin{itemize}
+    \item \textbf{Programming Language}: Python
+    \item \textbf{Data Acquisition}: Custom scripts for sample data creation and web crawling
+    \item \textbf{Indexing and Retrieval}: Whoosh search engine
+    \item \textbf{Answer Generation}: GPT-3.5-turbo 
+    \item \textbf{Deployment}: A batch script (\texttt{run_project.bat}) for orchestrating the execution of data creation, indexing, and the question-answer pipeline
+\end{itemize}
+
+\section{Conclusion}
+This technical documentation has outlined the core workings of the Islamic AI Agent. By integrating curated datasets, reliable web crawling techniques, and advanced neural language models, the system achieves a domain-specific approach to delivering contextually accurate answers related to Islamic jurisprudence. Future work will focus on enhancing multi-language support, refining the crawling algorithms, and further optimizing the validation mechanism to maintain high standards of doctrinal consistency.
+
+\end{document} 
