@@ -26,8 +26,13 @@ The system operates in 3 phases:
 3. **Q&A Interface**: Interactive Islamic knowledge assistant
 
 ```bash
-# Start the system (Windows)
-run_project.bat
+# Start the system (Windows) - Optional
+.\run_project.bat
+
+# Run project (Windows)
+Python main.py
+
+
 
 # Or run manually:
 python create_sample_data.py
